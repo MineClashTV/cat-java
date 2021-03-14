@@ -28,15 +28,7 @@ public class Arguments {
 				new Option("h", "help", false, "display this help and exit"),
 				new Option("v", "version", false, "display version information and exit"),
 		};
-	}
-
-	public void init() {
 		Arrays.stream(optionArray).forEach(options::addOption);
-
-		parsedArgs.put("number", false);
-		parsedArgs.put("number-nonblank", false);
-		parsedArgs.put("squeeze-blank", false);
-		parsedArgs.put("show-ends", false);
 	}
 
 	/**
@@ -49,17 +41,10 @@ public class Arguments {
 		var parser = new DefaultParser();
 		var commandLine = parser.parse(options, args);
 
-		if(commandLine.hasOption("number"))
-			parsedArgs.replace("number", true);
-
-		if(commandLine.hasOption("number-nonblank"))
-			parsedArgs.replace("number-nonblank", true);
-
-		if(commandLine.hasOption("squeeze-blank"))
-			parsedArgs.replace("squeeze-blank", true);
-
-		if(commandLine.hasOption("show-ends"))
-			parsedArgs.replace("show-ends", true);
+		parsedArgs.put("number", commandLine.hasOption("number"));
+		parsedArgs.put("number-nonblank", commandLine.hasOption("number-nonblank"));
+		parsedArgs.put("squeeze-blank", commandLine.hasOption("squeeze-blank"));
+		parsedArgs.put("show-ends", commandLine.hasOption("show-ends"));
 
 		if(commandLine.hasOption("help") ||
 				(commandLine.getOptions().length == 0 && commandLine.getArgs().length == 0)) {
@@ -73,7 +58,7 @@ public class Arguments {
 					"cat.jar [option] [file(s)]",
 					"concatenate files and print on the standard output\n\n",
 					options,
-					"\nPlease report issues at <git url goes here>"
+					"\nPlease report issues at https://github.com/MineClashTV/cat-java/issues"
 			);
 
 			// by the way Commons CLI team, I'd like to also be able to configure a padding for the short and long

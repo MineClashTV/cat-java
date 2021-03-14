@@ -10,11 +10,10 @@ import java.util.List;
 
 public class Main {
 
-	public static final String version = "1.0.0";
+	public static final String version = "1.0.1";
 
 	public static void main(String[] args) {
 		var arguments = new Arguments(args, version);
-		arguments.init();
 
 		try {
 			arguments.parse();
