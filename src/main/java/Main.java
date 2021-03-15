@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Main {
 
-	public static final String version = "1.0.1";
+	public static final String version = "1.1.0";
 
 	public static void main(String[] args) {
 		var arguments = new Arguments(args, version);

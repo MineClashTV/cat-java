@@ -24,8 +24,7 @@ Options:
 - ```-s```, ```--squeeze-blank``` - suppress repeated empty lines.
 - ```-v```, ```--version``` - display version information and exit.
 
-Note that these **do not behave exactly** like the regular cat options.
-These are merely cheap replicas that may do things slightly differently.
+They should behave more or less like you would expect.
 
 ## Dependencies
 If you are not a developer, you should not need to worry about this section. All

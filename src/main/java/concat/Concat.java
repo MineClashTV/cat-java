@@ -19,6 +19,7 @@ public class Concat {
 	public String concatenate() throws IOException {
 		var builder = new StringBuilder();
 		var combined = new ArrayList<String>();
+		var lineNumber = 0;
 
 		// doing the actual concatenation
 		for(var path : files)
@@ -28,18 +29,17 @@ public class Concat {
 		for(var i = 0; i < combined.size(); i++) {
 			var current = combined.get(i);
 
+			// don't number blank lines
+			if(!options.numberNonBlank || !current.isBlank())
+				lineNumber++;
+
 			// suppressing repeated blank lines
 			if(options.squeezeBlank && (current.isBlank() && combined.get(i - 1).isBlank()))
 				continue;
 
-			// numbering all lines
-			if(options.number && !options.numberNonBlank)
-				builder.append(i + 1).append(" | ");
-
-			// TODO: don't take blank lines into consideration at all when getting the line number
-			// numbering nonempty output lines
-			if(options.numberNonBlank && !current.isBlank())
-				builder.append(i + 1).append(" | ");
+			// numbering all lines, numbering nonempty output lines
+			if((options.number && !options.numberNonBlank) || (options.numberNonBlank && !current.isBlank()))
+				builder.append(lineNumber).append(" | ");
 
 			builder.append(current);
 		}
